@@ -28,5 +28,18 @@ document.addEventListener("DOMContentLoaded", function () {
         currentPlayer = currentPlayer === "X" ? "O" : "X";
       }
     });
+
+    div.addEventListener("mouseover", function () {
+        if (gameState[Array.from(squares).indexOf(div)] === null) {
+          div.className = "hover";
+        }
+    });
+
+    div.addEventListener("mouseout", function () {
+      const index = Array.from(squares).indexOf(div);
+      div.className = gameState[index]
+        ? `square ${gameState[index]}`
+        : "square";
   });
+});
 });
