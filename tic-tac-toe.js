@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const winner = checkWinner();
         if (winner) {
           statusDiv.textContent = `Congratulations! ${winner} is the Winner!`;
-          statusDiv.classList.add("you-won");
+          statusDiv.className = "you-won";
           return; // stop the game
         }
 
@@ -65,9 +65,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     div.addEventListener("mouseover", function () {
-        if (gameState[Array.from(squares).indexOf(div)] === null) {
-          div.className = "hover";
-        }
+      if (gameState[Array.from(squares).indexOf(div)] === null) {
+        div.className = "hover";
+      }
     });
 
     div.addEventListener("mouseout", function () {
@@ -75,6 +75,25 @@ document.addEventListener("DOMContentLoaded", function () {
       div.className = gameState[index]
         ? `square ${gameState[index]}`
         : "square";
+    });
   });
-});
+
+  // New Game button functionality
+  const newGameButton = document.querySelector(".btn");
+  newGameButton.addEventListener("click", function () {
+    // Reset game state
+    gameState = Array(9).fill(null);
+    currentPlayer = "X";
+
+    // Clear all squares
+    squares.forEach((square) => {
+      square.textContent = "";
+      square.className = "square";
+    });
+
+    // Reset status message
+    statusDiv.textContent =
+      "Move your mouse over a square and click to play an X or an O.";
+    statusDiv.className = "";
+  });
 });
